@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Google Verifiable Quantum Circuit Compilationの日本語技術ガイド。KickMixの3課題 invsqrt・dqi・dfthcsos の数学的背景、回路最適化、費用と検証を101ページで解説。PDFを無料公開。">
+  <meta name="description" content="Google Verifiable Quantum Circuit Compilationの日本語技術ガイド。KickMixの3課題 invsqrt・dqi・dfthcsos の数学的背景、回路最適化、費用と検証を109ページで解説。PDFを無料公開。">
   <meta name="theme-color" content="#122c2a">
   <meta property="og:type" content="website">
   <meta property="og:title" content="KickMixの3課題を理解する | Google Verifiable QCC 技術ガイド">
-  <meta property="og:description" content="数学的背景から回路最適化、再現と検証まで。全101ページの日本語PDFを公開。">
+  <meta property="og:description" content="数学的背景から回路最適化、再現と検証まで。全109ページの日本語PDFを公開。">
   <meta property="og:url" content="https://forest1040.github.io/google-verifiable-qcc-guide/">
   <link rel="canonical" href="https://forest1040.github.io/google-verifiable-qcc-guide/">
   <title>KickMixの3課題を理解する | Google Verifiable QCC 技術ガイド</title>
@@ -17,7 +17,7 @@
   <a class="skip" href="#main">本文へ移動</a>
   <header class="site-header wrap">
     <a class="brand" href="./" aria-label="QCC 技術ガイド ホーム"><span class="mark" aria-hidden="true">Q</span> QCC / TECHNICAL GUIDE</a>
-    <nav aria-label="メインナビゲーション"><a href="#contents">目次</a><a href="https://github.com/forest1040/google-verifiable-qcc-guide">GitHub ↗</a></nav>
+    <nav aria-label="メインナビゲーション"><a href="#revision">改訂内容</a><a href="#contents">目次</a><a href="https://github.com/forest1040/google-verifiable-qcc-guide">GitHub ↗</a></nav>
   </header>
   <main id="main">
     <section class="hero wrap" aria-labelledby="title">
@@ -27,7 +27,7 @@
         <p class="subtitle">invsqrt・dqi・dfthcsos の<br>数学的背景と回路最適化</p>
         <p class="intro">量子回路は何を計算し、どう小さくできるのか。<br>数学の基礎から公開回路の構造、費用と検証の読み方までをつなぐ、日本語の技術ガイドです。</p>
         <div class="actions"><a class="button primary" href="Google_Verifiable_QCC_Technical_Guide.pdf">PDFを読む <span aria-hidden="true">↗</span></a><a class="button secondary" href="Google_Verifiable_QCC_Technical_Guide.pdf" download>ダウンロード <span aria-hidden="true">↓</span></a></div>
-        <p class="file-info">日本語 / 全101ページ / PDF 約1.21 MiB<br>2026年11月2日改訂 · 公開回路の基準日：2026年10月30日</p>
+        <p class="file-info">日本語 / 全109ページ / PDF 約1.27 MiB<br>2026年11月13日改訂 · 公開回路の取得日：2026年10月30日・11月4日・11月13日</p>
       </div>
       <div class="book-area" aria-hidden="true">
         <div class="book">
@@ -38,6 +38,20 @@
         </div>
         <p class="book-caption">THEORY → CIRCUITS → VERIFICATION</p>
       </div>
+    </section>
+    <section class="revision wrap" id="revision" aria-labelledby="revision-title">
+      <div class="section-heading">
+        <p class="eyebrow">NOVEMBER 13, 2026 / REVISED EDITION</p>
+        <h2 id="revision-title">今回の改訂内容</h2>
+        <p>11月4日・13日の比較結果を追補。10月30日版の詳しい分析を残し、公開回路がどう変わったかを整理しました。</p>
+      </div>
+      <dl class="revision-list">
+        <div><dt>invsqrt：46量子ビット版を追加</dt><dd>11月4日の62量子ビット版、測定をまたぐ窓のマージ、zero-coinに続き、専用算術と値の消去・再計算で46量子ビットに抑える構成を解説。取得した公開組合せの費用は11月4日版との比較で約18.24%減りました。</dd></div>
+        <div><dt>DQI：cutoffと失敗率の関係を整理</dt><dd>固定スケジュールの復号実装と、低確率の入力を処理対象から外すcutoff 15・17・18を比較。AND積のキャッシュと241箇所の保持を整理し、Public実測値と失敗ゼロを条件とする候補値を区別しました。</dd></div>
+        <div><dt>dfthcsos：テーブルとローダーを同時に設計</dt><dd>11月4日の分解・ローダー改良に加え、Reed–Muller型の符号制約を角度wordに組み込む方法を追加。1 passで4,057 Toffoliとなるローダーと、テーブルの学習を一体で扱います。</dd></div>
+        <div><dt>比較・検証条件と改訂履歴を充実</dt><dd>各取得日の比較表、公開順位表と公開回路の違い、18ファイルのSHA-256照合、第三者の監査記録を追記。付録Fに改訂履歴を新設しました。</dd></div>
+      </dl>
+      <a class="button secondary" href="Google_Verifiable_QCC_Technical_Guide.pdf#page=107">PDFの改訂履歴を読む <span aria-hidden="true">↗</span></a>
     </section>
     <section class="benchmarks" aria-labelledby="benchmarks-title">
       <div class="wrap">
@@ -55,14 +69,15 @@
         <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=7"><span>01</span><div><h3>KickMix と Verifier</h3><p>命令・シミュレーション・検証の範囲</p></div><small>p. 1</small></a></li>
         <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=14"><span>02</span><div><h3>回路最適化の数学</h3><p>Carleman線形化・Walsh展開・Horner法・ANF</p></div><small>p. 8</small></a></li>
         <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=42"><span>03</span><div><h3>KickMix 回路の最適化手法</h3><p>費用モデル・Toffoli・位相回転・量子ビット数</p></div><small>p. 36</small></a></li>
-        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=59"><span>04</span><div><h3>invsqrt</h3><p>物理的背景から公開回路の費用分析へ</p></div><small>p. 53</small></a></li>
-        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=64"><span>05</span><div><h3>dqi</h3><p>Reed–Solomon復号と位相補正</p></div><small>p. 58</small></a></li>
-        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=72"><span>06</span><div><h3>dfthcsos</h3><p>ブロックエンコーディングとANGLE回路</p></div><small>p. 66</small></a></li>
-        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=90"><span>07</span><div><h3>公開回路の評価と検証方法</h3><p>再現条件・近似誤差・結果の信頼性</p></div><small>p. 84</small></a></li>
-        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=92"><span>08</span><div><h3>3課題の比較と今後の最適化課題</h3><p>共通原理と残る研究課題</p></div><small>p. 86</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=59"><span>04</span><div><h3>invsqrt</h3><p>公開回路の費用分析・46量子ビット版の専用算術</p></div><small>p. 53</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=65"><span>05</span><div><h3>dqi</h3><p>Reed–Solomon復号・cutoffと失敗率の交換</p></div><small>p. 59</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=75"><span>06</span><div><h3>dfthcsos</h3><p>ANGLE回路・角度wordとテーブルの同時設計</p></div><small>p. 69</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=94"><span>07</span><div><h3>公開回路の評価と検証方法</h3><p>再現条件・近似誤差・結果の信頼性</p></div><small>p. 88</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=97"><span>08</span><div><h3>3課題の比較と今後の最適化課題</h3><p>公開組合せの推移・順位表との区別・研究課題</p></div><small>p. 91</small></a></li>
+        <li><a href="Google_Verifiable_QCC_Technical_Guide.pdf#page=107"><span>付録F</span><div><h3>改訂履歴</h3><p>今回の追補と前版の位置付け</p></div><small>p. 101</small></a></li>
       </ol>
     </section>
-    <section class="notes wrap" aria-labelledby="notes-title"><div><p class="eyebrow">READING NOTES</p><h2 id="notes-title">本書の比較・検証について</h2></div><div><p>回路比較は2026年10月30日時点の取得版を基準としています。掲載数値は公開物とその検証記録に基づく歴史的比較であり、現在の順位や最良記録を示すものではありません。</p><p>公式Verifierの判定、全入力の厳密計算、著者報告、解析モデルの推定を区別して説明します。各公開回路の出典と再現条件は、本文および付録を参照してください。</p></div></section>
+    <section class="notes wrap" aria-labelledby="notes-title"><div><p class="eyebrow">READING NOTES</p><h2 id="notes-title">本書の比較・検証について</h2></div><div><p>10月30日取得版の詳細分析を残し、11月4日・13日の公開回路と順位表の比較を追補しています。掲載数値は各取得時点の記録であり、現在の順位や最良記録を示すものではありません。</p><p>公式Verifierの判定、全入力の厳密計算、著者報告、解析モデルの推定を区別しています。11月13日版は公開実行ログとファイルのSHA-256照合に基づき、本書側でVerifierを再実行した結果ではありません。出典と再現条件は本文・付録を参照してください。</p></div></section>
     <section class="closing wrap"><div><p class="eyebrow">START READING</p><h2>回路の背後にある数学へ。</h2><p>全8章・付録・参考文献を、1冊のPDFに。</p></div><a class="button primary" href="Google_Verifiable_QCC_Technical_Guide.pdf">PDFを読む <span aria-hidden="true">↗</span></a></section>
   </main>
   <footer class="wrap"><span>Google Verifiable QCC — Technical Guide</span><a href="https://github.com/forest1040/google-verifiable-qcc-guide">公開リポジトリ ↗</a></footer>
